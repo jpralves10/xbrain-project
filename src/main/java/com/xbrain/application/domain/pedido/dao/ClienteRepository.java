@@ -7,6 +7,6 @@ import com.xbrain.application.domain.pedido.entity.Cliente;
 import com.xbrain.application.domain.pedido.entity.ClientePK;
 
 @Repository
-public interface ClienteDAO extends JpaRepository<Cliente, ClientePK> {
+public interface ClienteRepository extends JpaRepository<Cliente, ClientePK> {
 
 }

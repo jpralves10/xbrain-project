@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class PedidoPK implements Serializable {
+public class PedidoProdutoPK implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -14,7 +14,7 @@ public class PedidoPK implements Serializable {
 	private Integer idPedido;
 	
 	@Column
-	private Integer idCliente;
+	private Integer idProduto;
 
 	public Integer getIdPedido() {
 		return idPedido;
@@ -24,20 +24,20 @@ public class PedidoPK implements Serializable {
 		this.idPedido = idPedido;
 	}
 
-	public Integer getIdCliente() {
-		return idCliente;
+	public Integer getIdProduto() {
+		return idProduto;
 	}
 
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
+	public void setIdProduto(Integer idProduto) {
+		this.idProduto = idProduto;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idCliente == null) ? 0 : idCliente.hashCode());
 		result = prime * result + ((idPedido == null) ? 0 : idPedido.hashCode());
+		result = prime * result + ((idProduto == null) ? 0 : idProduto.hashCode());
 		return result;
 	}
 
@@ -49,16 +49,16 @@ public class PedidoPK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PedidoPK other = (PedidoPK) obj;
-		if (idCliente == null) {
-			if (other.idCliente != null)
-				return false;
-		} else if (!idCliente.equals(other.idCliente))
-			return false;
+		PedidoProdutoPK other = (PedidoProdutoPK) obj;
 		if (idPedido == null) {
 			if (other.idPedido != null)
 				return false;
 		} else if (!idPedido.equals(other.idPedido))
+			return false;
+		if (idProduto == null) {
+			if (other.idProduto != null)
+				return false;
+		} else if (!idProduto.equals(other.idProduto))
 			return false;
 		return true;
 	}
