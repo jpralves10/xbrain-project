@@ -19,7 +19,7 @@ public class ProdutoResource {
 	@Autowired
 	private ProdutoService serviceProduto;
 	
-	@RequestMapping("/listar")
+	@RequestMapping("/list")
 	public ResponseEntity<?> obterListaProduto() {
 		
 		List<Produto> listaProduto = serviceProduto.buscarListaProduto();

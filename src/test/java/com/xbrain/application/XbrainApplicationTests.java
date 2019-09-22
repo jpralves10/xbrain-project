@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.xbrain.application;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +10,5 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class XbrainApplicationTests {
 
 	@Test
-	public void contextLoads() {
-	}
-
+	public void contextLoads() {}
 }

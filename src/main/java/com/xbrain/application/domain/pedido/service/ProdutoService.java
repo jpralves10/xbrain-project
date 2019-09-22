@@ -21,13 +21,12 @@ public class ProdutoService {
 	private ProdutoRepository dbProduto;
 	
 	@Transactional
-	public List<Produto> buscarListaProduto() {
-		
+	public List<Produto> buscarListaProduto() {		
 		return dbProduto.findAll();
 	}
 	
 	@Transactional
-	public void saveProduto(String jsonProduto) {
+	public Produto saveProduto(String jsonProduto) {
 		
 		JsonParser parser = new JsonParser();
 		JsonElement jsonElement = parser.parse(jsonProduto);
@@ -42,6 +41,6 @@ public class ProdutoService {
         produto.getId().setIdProduto(idProduto);
         produto.setDescricao(descricao);
 		
-		dbProduto.save(produto);
+		return dbProduto.save(produto);
 	}
 }

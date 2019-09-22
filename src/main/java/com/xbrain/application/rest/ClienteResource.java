@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService serviceCliente;
 	
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	public ResponseEntity<?> obterListaCliente() {
 		
 		List<Cliente> listaCliente = serviceCliente.buscarListaCliente();
@@ -29,8 +30,6 @@ public class ClienteResource {
 	
 	@PostMapping("/save")
 	public ResponseEntity<?> saveCliente(@RequestBody String jsonCliente) {
-		
-		System.out.println(jsonCliente);
 		
 		serviceCliente.saveCliente(jsonCliente);
 		

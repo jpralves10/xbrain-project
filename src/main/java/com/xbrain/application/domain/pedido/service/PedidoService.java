@@ -1,11 +1,13 @@
 package com.xbrain.application.domain.pedido.service;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.xbrain.application.XbrainApplication;
 import com.xbrain.application.domain.pedido.dao.PedidoProdutoRepository;
 import com.xbrain.application.domain.pedido.dao.PedidoRepository;
 import com.xbrain.application.domain.pedido.entity.Pedido;
@@ -28,6 +31,8 @@ public class PedidoService {
 	private PedidoRepository dbPedido;
 	@Autowired
 	private PedidoProdutoRepository dbPedidoProduto;
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
 	
 	@Transactional
 	public List<Pedido> buscarListaPedido() {		
@@ -69,6 +74,12 @@ public class PedidoService {
         	
         	dbPedidoProduto.save(pedidoProduto);
         });
+        
+        List<String> message = new ArrayList<String>();
+        message.add("" + pedido.getId().getIdPedido());
+        message.add(pedido.getEnderecoEntrega());
+        
+        rabbitTemplate.convertAndSend(XbrainApplication.SFG_MESSAGE_QUEUE, message);
 	}
 	
 	@Transactional
@@ -84,7 +95,7 @@ public class PedidoService {
 			
 			return lastPedido.getId().getIdPedido() + 1;
 		}else {
-			return 0;
+			return 1;
 		}
 	}
 }

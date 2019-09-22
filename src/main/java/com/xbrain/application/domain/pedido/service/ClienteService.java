@@ -22,26 +22,25 @@ public class ClienteService {
 	
 	@Transactional
 	public List<Cliente> buscarListaCliente() {
-		
 		return dbCliente.findAll();
 	}
 	
 	@Transactional
 	public void saveCliente(String jsonCliente) {
-		
+
 		JsonParser parser = new JsonParser();
 		JsonElement jsonElement = parser.parse(jsonCliente);
-		
+
 		JsonObject jObject = jsonElement.getAsJsonObject();
         Integer idCliente = jObject.get("idCliente").getAsInt();
         String nome = jObject.get("nome").getAsString();
-                
+
         Cliente cliente = new Cliente();
         cliente.setId(new ClientePK());
-        
+
         cliente.getId().setIdCliente(idCliente);
         cliente.setNome(nome);
-		
+
 		dbCliente.save(cliente);
 	}
 }

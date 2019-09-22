@@ -19,7 +19,7 @@ public class PedidoResource {
 	@Autowired
 	private PedidoService servicePedido;
 	
-	@RequestMapping("/listar")
+	@RequestMapping("/list")
 	public ResponseEntity<?> obterListaPedido() {
 		
 		List<Pedido> listaPedido = servicePedido.buscarListaPedido();
